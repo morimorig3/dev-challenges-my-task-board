@@ -1,0 +1,12 @@
+services:
+  backend:
+    build: ./backend
+    image: my-task-board-nestjs:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run start:dev
