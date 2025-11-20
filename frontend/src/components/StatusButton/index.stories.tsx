@@ -1,17 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { TaskCard } from ".";
+import { StatusButton } from ".";
 
 const meta = {
-  component: TaskCard,
+  component: StatusButton,
   args: {
-    iconType: "work",
-    cardType: "completed",
-    title: "My Task",
-    description: "description",
     onClick: () => {},
+    buttonType: "completed",
   },
-} satisfies Meta<typeof TaskCard>;
+} satisfies Meta<typeof StatusButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
