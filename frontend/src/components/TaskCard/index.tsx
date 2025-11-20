@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 import { TaskIcons, type TaskIconsProps } from "../TaskIcon";
 import closeIcon from "@/assets/close_ring_duotone.svg";
 import timeIcon from "@/assets/Time_atack_duotone.svg";
@@ -9,6 +9,7 @@ interface TaskCardProps {
   cardType: keyof typeof CARD_TYPE_COLOR_MAP;
   title: string;
   description?: string;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const TaskCard: FC<TaskCardProps> = ({
@@ -16,12 +17,16 @@ export const TaskCard: FC<TaskCardProps> = ({
   cardType,
   title,
   description,
+  onClick,
 }) => {
   const { cardColor, iconColor, iconImage } = CARD_TYPE_COLOR_MAP[cardType];
   return (
-    <div className={`flex p-5 gap-5 rounded-2xl items-start ${cardColor}`}>
+    <button
+      className={`w-full flex p-5 gap-5 rounded-2xl items-start hover:cursor-pointer hover:opacity-80 transition-opacity ${cardColor}`}
+      onClick={onClick}
+    >
       <TaskIcons iconType={iconType} />
-      <div className="grow">
+      <div className="grow text-left">
         <p className="text-xl font-semibold">{title}</p>
         {description && <div>{description}</div>}
       </div>
@@ -30,7 +35,7 @@ export const TaskCard: FC<TaskCardProps> = ({
       >
         <img src={iconImage} />
       </span>
-    </div>
+    </button>
   );
 };
 
