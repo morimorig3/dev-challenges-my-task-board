@@ -1,17 +1,9 @@
+import { ICON_MAP } from "@/constants/indes";
 import type { FC } from "react";
 
 export interface TaskIconsProps {
   iconType: keyof typeof ICON_MAP;
 }
-
-const ICON_MAP = {
-  work: "🧑‍💻",
-  meeting: "💬",
-  trainig: "🏋️",
-  coffee: "☕️",
-  watch: "⏰",
-  book: "📚",
-} as const;
 
 export const TaskIcons: FC<TaskIconsProps> = ({ iconType }) => {
   return (

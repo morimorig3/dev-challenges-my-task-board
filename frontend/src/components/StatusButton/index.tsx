@@ -16,7 +16,7 @@ export const StatusButton: FC<StatusButtonProps> = ({
   isSelected,
 }) => {
   const { label, icon, iconColor } = BUTTON_MAP[buttonType];
-  const borderColor = `border-[#${isSelected ? "3662E3" : "E3E8EF"}]`;
+  const borderColor = isSelected ? "border-[#3662E3]" : "border-[#E3E8EF]";
   const fontWeight = isSelected ? "font-semibold" : "";
   return (
     <button
