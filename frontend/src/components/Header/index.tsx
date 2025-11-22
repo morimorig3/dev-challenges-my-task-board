@@ -13,10 +13,7 @@ export const Header: FC<HeaderProps> = ({ onClickEdit }) => {
       <div>
         <h1 className="text-[40px] flex gap-4 leading-none mb-2 line-clamp-1">
           My Task Board
-          <button
-            onClick={onClickEdit}
-            className="hover:cursor-pointer hover:opacity-80 transition-opacity"
-          >
+          <button onClick={onClickEdit} className="interactive-element">
             <img src={editIcon} alt="Edit title" />
           </button>
         </h1>

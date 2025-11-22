@@ -16,7 +16,7 @@ export const IconButton: FC<IconButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`grid place-items-center w-11 h-11 rounded-xl ${backgroundColor} hover:cursor-pointer hover:opacity-80 transition-opacity`}
+      className={`grid place-items-center w-11 h-11 rounded-xl ${backgroundColor} interactive-element`}
     >
       {ICON_MAP[iconType]}
     </button>

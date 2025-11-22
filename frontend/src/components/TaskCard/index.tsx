@@ -22,7 +22,7 @@ export const TaskCard: FC<TaskCardProps> = ({
   const { cardColor, iconColor, iconImage } = CARD_TYPE_COLOR_MAP[cardType];
   return (
     <button
-      className={`w-full flex p-5 gap-5 rounded-2xl items-start hover:cursor-pointer hover:opacity-80 transition-opacity ${cardColor}`}
+      className={`w-full flex p-5 gap-5 rounded-2xl items-start interactive-element ${cardColor}`}
       onClick={onClick}
     >
       <TaskIcons iconType={iconType} />

@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@layer components {
+  .interactive-element {
+    @apply hover:cursor-pointer hover:opacity-80 transition-opacity;
+  }
+}

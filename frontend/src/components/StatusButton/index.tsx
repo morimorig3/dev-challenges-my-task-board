@@ -21,7 +21,7 @@ export const StatusButton: FC<StatusButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`border-2 ${borderColor} ${fontWeight} flex items-center w-full rounded-xl gap-3 p-0.5 pr-3 text-sm hover:cursor-pointer hover:opacity-80 transition-opacity`}
+      className={`border-2 ${borderColor} ${fontWeight} flex items-center w-full rounded-xl gap-3 p-0.5 pr-3 text-sm interactive-element`}
     >
       <span
         className={`grid place-items-center w-11 h-11 rounded-xl ${iconColor}`}
