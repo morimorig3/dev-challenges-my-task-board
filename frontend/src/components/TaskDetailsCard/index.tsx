@@ -10,14 +10,19 @@ const INPUT_CLASS =
   "px-3 py-2 border border-[#97A3B6] w-full rounded-md outline-[#3662E3] placeholder-[#97A3B6]";
 const BUTTON_CLASS =
   "w-28 h-9 text-sm text-white inline-flex items-center justify-center gap-1 rounded-full interactive-element";
-interface TaskDetailsCardProps {}
+interface TaskDetailsCardProps {
+  onClickClose: () => void;
+}
 
-export const TaskDetailsCard: FC<TaskDetailsCardProps> = () => {
+export const TaskDetailsCard: FC<TaskDetailsCardProps> = ({ onClickClose }) => {
   return (
-    <div className="flex flex-col bg-white rounded-2xl px-7 py-5 min-h-screen">
+    <div className="flex flex-col bg-white rounded-2xl px-7 py-5 h-full">
       <header className="flex justify-between items-center mb-6">
         <p className="font-semibold text-sm">Task Details</p>
-        <button className="border border-[#E3E8EF] grid place-items-center w-9 h-9 rounded-lg interactive-element">
+        <button
+          onClick={onClickClose}
+          className="border border-[#E3E8EF] grid place-items-center w-9 h-9 rounded-lg interactive-element"
+        >
           <img src={closeIcon} alt="close" />
         </button>
       </header>
