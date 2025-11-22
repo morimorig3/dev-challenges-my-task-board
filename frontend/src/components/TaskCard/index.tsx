@@ -19,7 +19,11 @@ export const TaskCard: FC<TaskCardProps> = ({
   description,
   onClick,
 }) => {
-  const { cardColor, iconColor, iconImage } = CARD_TYPE_COLOR_MAP[cardType];
+  const {
+    cardColor,
+    iconColor = "",
+    iconImage = "",
+  } = CARD_TYPE_COLOR_MAP[cardType];
   return (
     <button
       className={`w-full flex p-5 gap-5 rounded-2xl items-start interactive-element ${cardColor}`}
@@ -30,11 +34,13 @@ export const TaskCard: FC<TaskCardProps> = ({
         <p className="text-xl font-semibold">{title}</p>
         {description && <div>{description}</div>}
       </div>
-      <span
-        className={`grid place-items-center w-12 h-12 rounded-xl ${iconColor}`}
-      >
-        <img src={iconImage} />
-      </span>
+      {iconImage && (
+        <span
+          className={`grid place-items-center w-12 h-12 rounded-xl ${iconColor}`}
+        >
+          <img src={iconImage} />
+        </span>
+      )}
     </button>
   );
 };
@@ -54,5 +60,10 @@ const CARD_TYPE_COLOR_MAP = {
     cardColor: "bg-[#F7D4D3]",
     iconColor: "bg-[#DD524C]",
     iconImage: closeIcon,
+  },
+  blank: {
+    cardColor: "bg-[#E3E8EF]",
+    iconColor: "",
+    iconImage: "",
   },
 } as const;
