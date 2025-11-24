@@ -7,18 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Task {
-  id          Int     @id @default(autoincrement())
-  title       String
-  description String? @default("")
-  status      String
-  type        String
-  user        User    @relation(fields: [userId], references: [id])
-  userId      Int
+enum TaskStatus {
+  COMPLETED
+  IN_PROGRESS
+  WONT_DO
+  BLANK
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  password String
-  tasks    Task[]
+enum IconType {
+  WORK
+  MEETING
+  TRAINING
+  COFFEE
+  WATCH
+  BOOK
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?    @default("")
+  status      TaskStatus @default(BLANK)
+  iconType    IconType
+  board       Board      @relation(fields: [boardId], references: [id])
+  boardId     Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Board {
+  id        Int      @id @default(autoincrement())
+  name      String
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
