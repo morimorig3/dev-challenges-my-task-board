@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { AddTaskCard } from "./components/AddTaskCard";
-import { Header } from "./components/Header";
-import { TaskCard } from "./components/TaskCard";
-import { TaskDetailsCard } from "./components/TaskDetailsCard";
+import { AddTaskCard } from "@/components/AddTaskCard";
+import { Header } from "@/components/Header";
+import { TaskCard } from "@/components/TaskCard";
+import { TaskDetailsCard } from "@/components/TaskDetailsCard";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
-function App() {
+export const BoardScreen = () => {
   const [isShowDetails, setIsShowDetail] = useState(false);
+  const { boardId } = useParams();
+  useEffect(() => {
+    console.log(boardId);
+  }, [boardId]);
   return (
     <div className="font-[Outfit] px-10 py-14">
       <div className="max-w-2xl mx-auto">
@@ -40,6 +45,4 @@ function App() {
       </div>
     </div>
   );
-}
-
-export default App;
+};
