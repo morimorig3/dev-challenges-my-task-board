@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from '@prisma/client';
 
@@ -12,7 +20,20 @@ export class BoardsController {
   }
 
   @Post()
-  async createBoard(@Body() body: { name: string }): Promise<Board> {
-    return await this.boardsService.createBoard(body.name);
+  async createBoard(@Body('name') name: string): Promise<Board> {
+    return await this.boardsService.createBoard(name);
+  }
+
+  @Put(':id')
+  async updateBoard(
+    @Param('id') id: string,
+    @Body('name') name: string,
+  ): Promise<Board> {
+    return await this.boardsService.updateBoard(id, name);
+  }
+
+  @Delete(':id')
+  async deleteBoard(@Param('id') id: string): Promise<void> {
+    return await this.boardsService.deleteBoard(id);
   }
 }
