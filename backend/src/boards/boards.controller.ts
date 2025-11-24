@@ -8,14 +8,18 @@ import {
   Put,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
-import { Board } from '@prisma/client';
+import { Board, Prisma } from '@prisma/client';
+
+type BoardWithTasks = Prisma.BoardGetPayload<{
+  include: { tasks: true };
+}>;
 
 @Controller('boards')
 export class BoardsController {
   constructor(private readonly boardsService: BoardsService) {}
 
   @Get(':id')
-  async getBoard(@Param('id') id: string): Promise<Board> {
+  async getBoard(@Param('id') id: string): Promise<BoardWithTasks> {
     return await this.boardsService.getBoard(id);
   }
 

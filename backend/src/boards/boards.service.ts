@@ -1,15 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Board } from '@prisma/client';
+import { Board, Prisma } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from 'src/prisma/prisma.service';
+
+type BoardWithTasks = Prisma.BoardGetPayload<{
+  include: { tasks: true };
+}>;
 
 @Injectable()
 export class BoardsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getBoard(id: string): Promise<Board> {
+  async getBoard(id: string): Promise<BoardWithTasks> {
     const board = await this.prismaService.board.findUnique({
       where: { id: Number(id) },
+      include: { tasks: true },
     });
     if (!board) {
       throw new NotFoundException('Board not found');
