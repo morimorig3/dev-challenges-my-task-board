@@ -20,7 +20,7 @@ export class TasksService {
         description,
         status,
         iconType,
-        boardId: Number(boardId),
+        boardId,
       },
     });
   }
@@ -34,7 +34,7 @@ export class TasksService {
   ): Promise<Task> {
     try {
       return this.prismaService.task.update({
-        where: { id: Number(id) },
+        where: { id },
         data: {
           title,
           status,
@@ -56,7 +56,7 @@ export class TasksService {
   async deleteTask(id: string): Promise<void> {
     try {
       await this.prismaService.task.delete({
-        where: { id: Number(id) },
+        where: { id },
       });
     } catch (error) {
       if (

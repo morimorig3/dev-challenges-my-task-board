@@ -24,19 +24,19 @@ enum IconType {
 }
 
 model Task {
-  id          Int        @id @default(autoincrement())
+  id          String        @id @default(uuid())
   title       String
   description String?    @default("")
   status      TaskStatus @default(BLANK)
   iconType    IconType
   board       Board      @relation(fields: [boardId], references: [id])
-  boardId     Int
+  boardId     String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
 
 model Board {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   name      String
   tasks     Task[]
   createdAt DateTime @default(now())

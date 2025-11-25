@@ -13,7 +13,7 @@ export class BoardsService {
 
   async getBoard(id: string): Promise<BoardWithTasks> {
     const board = await this.prismaService.board.findUnique({
-      where: { id: Number(id) },
+      where: { id },
       include: { tasks: true },
     });
     if (!board) {
@@ -33,7 +33,7 @@ export class BoardsService {
   async updateBoard(id: string, name: string): Promise<Board> {
     try {
       return await this.prismaService.board.update({
-        where: { id: Number(id) },
+        where: { id },
         data: { name },
       });
     } catch (error) {
@@ -50,7 +50,7 @@ export class BoardsService {
   async deleteBoard(id: string): Promise<void> {
     try {
       await this.prismaService.board.delete({
-        where: { id: Number(id) },
+        where: { id },
       });
     } catch (error) {
       if (
