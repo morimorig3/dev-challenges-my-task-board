@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Board, Prisma } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateBoardDto } from './schemas/create-board.schema';
+import { UpdateBoardDto } from './schemas/update-board.schema';
 
 type BoardWithTasks = Prisma.BoardGetPayload<{
   include: { tasks: true };
@@ -22,19 +24,20 @@ export class BoardsService {
     return board;
   }
 
-  async createBoard(name: string): Promise<Board> {
+  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
     return await this.prismaService.board.create({
-      data: {
-        name,
-      },
+      data: createBoardDto,
     });
   }
 
-  async updateBoard(id: string, name: string): Promise<Board> {
+  async updateBoard(
+    id: string,
+    updateBoardDto: UpdateBoardDto,
+  ): Promise<Board> {
     try {
       return await this.prismaService.board.update({
         where: { id },
-        data: { name },
+        data: updateBoardDto,
       });
     } catch (error) {
       if (
