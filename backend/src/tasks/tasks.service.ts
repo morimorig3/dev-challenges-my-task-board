@@ -1,46 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IconType, Task, TaskStatus } from '@prisma/client';
+import { Task } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateTaskDto } from './schemas/create-task.schema';
+import { UpdateTaskDto } from './schemas/update-task.schema';
 
 @Injectable()
 export class TasksService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createTask(
-    title: string,
-    status: TaskStatus,
-    description: string,
-    iconType: IconType,
-    boardId: string,
-  ): Promise<Task> {
+  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.prismaService.task.create({
-      data: {
-        title,
-        description,
-        status,
-        iconType,
-        boardId,
-      },
+      data: createTaskDto,
     });
   }
 
-  async updateTask(
-    id: string,
-    title: string,
-    status: TaskStatus,
-    description: string,
-    iconType: IconType,
-  ): Promise<Task> {
+  async updateTask(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
     try {
       return this.prismaService.task.update({
         where: { id },
-        data: {
-          title,
-          status,
-          description,
-          iconType,
-        },
+        data: updateTaskDto,
       });
     } catch (error) {
       if (
