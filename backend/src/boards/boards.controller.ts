@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board, Prisma } from '@prisma/client';
@@ -43,7 +43,7 @@ export class BoardsController {
     return await this.boardsService.createBoard(createBoardDto);
   }
 
-  @Put(':id')
+  @Patch(':id')
   async updateBoard(
     @Param('id', new ZodValidatorPipe(z.uuid())) id: string,
     @Body(new ZodValidatorPipe(updateBoardSchema))
