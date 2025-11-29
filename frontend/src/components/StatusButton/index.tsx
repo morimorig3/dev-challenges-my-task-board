@@ -2,6 +2,7 @@ import type { FC, MouseEventHandler } from "react";
 import closeIcon from "@/assets/close_ring_duotone.svg";
 import timeIcon from "@/assets/Time_atack_duotone.svg";
 import doneIcon from "@/assets/Done_round_duotone.svg";
+import addIcon from "@/assets/Add_round_duotone.svg";
 import selectIcon from "@/assets/Done_round.svg";
 
 interface StatusButtonProps {
@@ -20,6 +21,7 @@ export const StatusButton: FC<StatusButtonProps> = ({
   const fontWeight = isSelected ? "font-semibold" : "";
   return (
     <button
+      type="button"
       onClick={onClick}
       className={`border-2 ${borderColor} ${fontWeight} flex items-center w-full rounded-xl gap-3 p-0.5 pr-3 text-sm interactive-element`}
     >
@@ -39,6 +41,11 @@ export const StatusButton: FC<StatusButtonProps> = ({
 };
 
 const BUTTON_MAP = {
+  blank: {
+    label: "To Do",
+    icon: addIcon,
+    iconColor: "bg-[#E3E8EF]",
+  },
   completed: {
     label: "Completed",
     icon: doneIcon,

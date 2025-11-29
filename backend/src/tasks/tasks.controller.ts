@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from '@prisma/client';
 import { ZodValidatorPipe } from 'src/common/pipes/zod-validator/zod-validator.pipe';
@@ -23,7 +23,7 @@ export class TasksController {
     return this.tasksService.createTask(createTaskDto);
   }
 
-  @Put(':id')
+  @Patch(':id')
   async updateTask(
     @Param('id', new ZodValidatorPipe(z.uuid())) id: string,
     @Body(new ZodValidatorPipe(updateTaskSchema)) updateTaskDto: UpdateTaskDto,

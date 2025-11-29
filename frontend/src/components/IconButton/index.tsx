@@ -15,6 +15,7 @@ export const IconButton: FC<IconButtonProps> = ({
   const backgroundColor = isSelected ? "bg-[#F5D565]" : "bg-[#E3E8EF]";
   return (
     <button
+      type="button"
       onClick={onClick}
       className={`grid place-items-center w-11 h-11 rounded-xl ${backgroundColor} interactive-element`}
     >

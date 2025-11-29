@@ -1,6 +1,11 @@
 import type { FC } from "react";
 import logo from "@/assets/Logo.svg";
 import checkIcon from "@/assets/Done_round.svg";
+import {
+  useForm,
+  type SubmitHandler,
+  type UseFormRegister,
+} from "react-hook-form";
 
 const LABEL_CLASS = "text-[#97A3B6] text-xs mb-1";
 const INPUT_CLASS =
@@ -8,33 +13,42 @@ const INPUT_CLASS =
 const BUTTON_CLASS =
   "w-28 h-9 text-sm text-white inline-flex items-center justify-center gap-1 rounded-full interactive-element";
 
-interface BoardAddCardProps {
-  onClickCreate: () => void;
+interface Input {
+  name: string;
+  description: string;
 }
 
-export const BoardAddCard: FC<BoardAddCardProps> = ({ onClickCreate }) => {
+interface BoardAddCardProps {
+  handleClickCreate: (name: string, description: string) => void;
+}
+
+export const BoardAddCard: FC<BoardAddCardProps> = ({ handleClickCreate }) => {
+  const { register, handleSubmit } = useForm<Input>();
+  const onSubmit: SubmitHandler<Input> = async ({ name, description }) => {
+    handleClickCreate(name, description);
+  };
   return (
     <div className="flex flex-col bg-white rounded-2xl px-7 py-5 h-full">
       <header className="flex gap-x-3 items-center mb-6">
         <img src={logo} alt="logo" />
         <p className="font-semibold text-xl">Let's Create Task Board</p>
       </header>
-      <main className="flex flex-col gap-y-4">
-        <InputBoardName />
-        <InputBoardDescription />
+      <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <InputBoardName register={register} />
+        <InputBoardDescription register={register} />
         <button
           className={`${BUTTON_CLASS} bg-[#3662E3] mx-auto`}
-          onClick={onClickCreate}
+          type="submit"
         >
           Create
           <img src={checkIcon} />
         </button>
-      </main>
+      </form>
     </div>
   );
 };
 
-const InputBoardName = () => {
+const InputBoardName = ({ register }: { register: UseFormRegister<Input> }) => {
   return (
     <div>
       <p className={LABEL_CLASS}>Board name</p>
@@ -43,12 +57,17 @@ const InputBoardName = () => {
         type="text"
         maxLength={50}
         placeholder="Enter a task name"
+        {...register("name")}
       />
     </div>
   );
 };
 
-const InputBoardDescription = () => {
+const InputBoardDescription = ({
+  register,
+}: {
+  register: UseFormRegister<Input>;
+}) => {
   return (
     <div>
       <p className={LABEL_CLASS}>Description</p>
@@ -56,6 +75,7 @@ const InputBoardDescription = () => {
         className={`${INPUT_CLASS} min-h-32`}
         maxLength={255}
         placeholder="Enter a short description"
+        {...register("description")}
       />
     </div>
   );

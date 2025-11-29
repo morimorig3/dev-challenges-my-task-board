@@ -1,8 +1,6 @@
 import type { FC, MouseEventHandler } from "react";
 import { TaskIcons, type TaskIconsProps } from "../TaskIcon";
-import closeIcon from "@/assets/close_ring_duotone.svg";
-import timeIcon from "@/assets/Time_atack_duotone.svg";
-import doneIcon from "@/assets/Done_round_duotone.svg";
+import { CARD_TYPE_COLOR_MAP } from "@/constants/indes";
 
 interface TaskCardProps {
   iconType: TaskIconsProps["iconType"];
@@ -31,8 +29,10 @@ export const TaskCard: FC<TaskCardProps> = ({
     >
       <TaskIcons iconType={iconType} />
       <div className="grow text-left">
-        <p className="text-xl font-semibold">{title}</p>
-        {description && <div>{description}</div>}
+        <p className="text-xl font-semibold mb-1">{title}</p>
+        {description && (
+          <p className="text-sm line-clamp-2">{description}</p>
+        )}
       </div>
       {iconImage && (
         <span
@@ -44,26 +44,3 @@ export const TaskCard: FC<TaskCardProps> = ({
     </button>
   );
 };
-
-const CARD_TYPE_COLOR_MAP = {
-  completed: {
-    cardColor: "bg-[#A0ECB1]",
-    iconColor: "bg-[#32D657]",
-    iconImage: doneIcon,
-  },
-  inProgress: {
-    cardColor: "bg-[#F5D565]",
-    iconColor: "bg-[#E9A23B]",
-    iconImage: timeIcon,
-  },
-  wontDo: {
-    cardColor: "bg-[#F7D4D3]",
-    iconColor: "bg-[#DD524C]",
-    iconImage: closeIcon,
-  },
-  blank: {
-    cardColor: "bg-[#E3E8EF]",
-    iconColor: "",
-    iconImage: "",
-  },
-} as const;
